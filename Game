@@ -1,0 +1,60 @@
+#Utilizing pygame to create a simple roguelike game
+
+import pygame
+
+def setScreen(int1, int2, int3):
+        screen.fill((int1,int2,int3))
+        
+pygame.init()
+screen = pygame.display.set_mode((600, 600))
+clock = pygame.time.Clock()
+done = False
+
+x = 30
+y = 40
+weapon = 'null'
+ 
+while not done:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        done = True
+         
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_UP]: y -= 2
+        if pressed[pygame.K_DOWN]: y += 2
+        if pressed[pygame.K_LEFT]: x -= 2
+        if pressed[pygame.K_RIGHT]: x += 2
+         
+        setScreen(255, 255, 255)
+        player = pygame.image.load('skullboy.png')
+        bow = pygame.image.load('Bow.png')
+        sword = pygame.image.load('Sword.png')
+        
+        font = pygame.font.Font(None, 20)
+        text = font.render('TAKE YOUR WEAPON (Control with arrow keys)', True, (0, 0, 0))
+        
+        screen.blit(player,(x,y))
+        screen.blit(bow,(60,400))
+        screen.blit(sword,(300,390))
+        screen.blit(text,(10,10))
+        
+        if x in range (30,90) and y in range(370,430):
+                screen.blit(font.render('Do you want the bow? Type Y or N', True, (0, 0, 0)), (200,200))
+                if pressed[pygame.K_y]:
+                        weapon = 'bow'
+                elif pressed[pygame.K_n]:
+                        screen.blit(font.render('Ok', True, (0, 0, 0)), (150,300))
+
+        if x in range (270,330) and y in range(360,420):
+                screen.blit(font.render('Do you want the bow? Type Y or N', True, (0, 0, 0)), (200,200))
+                if pressed[pygame.K_y]:
+                        weapon = 'sword'
+                elif pressed[pygame.K_n]:
+                        screen.blit(font.render('Ok', True, (0, 0, 0)), (150,300))
+                        
+        if weapon == 'bow' or weapon == 'sword':
+                setScreen(0,0,0)
+ 
+        
+        pygame.display.flip()
+        clock.tick(60)
