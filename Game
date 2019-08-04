@@ -20,32 +20,35 @@ while not done:
                         done = True
          
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]: y -= 2
-        if pressed[pygame.K_DOWN]: y += 2
-        if pressed[pygame.K_LEFT]: x -= 2
-        if pressed[pygame.K_RIGHT]: x += 2
+        
+        if weapon == 'null':
+                if pressed[pygame.K_UP]: y -= 2
+                if pressed[pygame.K_DOWN]: y += 2
+                if pressed[pygame.K_LEFT]: x -= 2
+                if pressed[pygame.K_RIGHT]: x += 2
          
         setScreen(255, 255, 255)
         player = pygame.image.load('skullboy.png')
         bow = pygame.image.load('Bow.png')
         sword = pygame.image.load('Sword.png')
+        enemy = pygame.image.load('Vivi.png')
         
         font = pygame.font.Font(None, 20)
-        text = font.render('TAKE YOUR WEAPON (Control with arrow keys)', True, (0, 0, 0))
+        text1 = font.render('TAKE YOUR WEAPON (Control with arrow keys)', True, (0, 0, 0))
         
         screen.blit(player,(x,y))
-        screen.blit(bow,(60,400))
-        screen.blit(sword,(300,390))
-        screen.blit(text,(10,10))
+        screen.blit(bow,(60,300))
+        screen.blit(sword,(300,290))
+        screen.blit(text1,(10,10))
         
-        if x in range (30,90) and y in range(370,430):
+        if x in range (30,90) and y in range(270,330):
                 screen.blit(font.render('Do you want the bow? Type Y or N', True, (0, 0, 0)), (200,200))
                 if pressed[pygame.K_y]:
                         weapon = 'bow'
                 elif pressed[pygame.K_n]:
                         screen.blit(font.render('Ok', True, (0, 0, 0)), (150,300))
 
-        if x in range (270,330) and y in range(360,420):
+        if x in range (270,330) and y in range(260,320):
                 screen.blit(font.render('Do you want the bow? Type Y or N', True, (0, 0, 0)), (200,200))
                 if pressed[pygame.K_y]:
                         weapon = 'sword'
@@ -53,8 +56,23 @@ while not done:
                         screen.blit(font.render('Ok', True, (0, 0, 0)), (150,300))
                         
         if weapon == 'bow' or weapon == 'sword':
-                setScreen(0,0,0)
- 
+                setScreen(255,255,255)
+                text2 = font.render('Press 1 to ATTACK, Press 2 to DEFEND, Press 3 to HEAL', True, (0, 0, 0))
+                
+                screen.blit(text2,(10,10))
+                screen.blit(player,(x,y))
+                screen.blit(enemy,(380,150))
+                
+                if pressed[pygame.K_UP]: y -= 0
+                if pressed[pygame.K_DOWN]: y += 0
+                if pressed[pygame.K_LEFT]: x -= 0
+                if pressed[pygame.K_RIGHT]: x += 0
+      
         
         pygame.display.flip()
         clock.tick(60)
+
+ 
+
+
+
